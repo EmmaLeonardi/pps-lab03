@@ -3,6 +3,8 @@ package u03
 import u03.Optionals.Optional
 import u03.Optionals.Optional.*
 
+import scala.annotation.tailrec
+
 object Sequences: // Essentially, generic linkedlists
 
   enum Sequence[E]:
@@ -33,6 +35,7 @@ object Sequences: // Essentially, generic linkedlists
      * E.g., [10, 20, 30], 0 => [10, 20, 30]
      * E.g., [], 2 => []
      */
+    @tailrec
     def skip[A](s: Sequence[A])(n: Int): Sequence[A] = s match
       case Cons(h, t) if n > 0 => skip(t)(n - 1)
       case Cons(_, _) => s
@@ -54,7 +57,9 @@ object Sequences: // Essentially, generic linkedlists
      * E.g., [10], [] => [10]
      * E.g., [], [] => []
      */
-    def concat[A](s1: Sequence[A], s2: Sequence[A]): Sequence[A] = ???
+    def concat[A](s1: Sequence[A], s2: Sequence[A]): Sequence[A] = s1 match
+      case Nil() => s2
+      case Cons(h1, t1) => Cons(h1,concat(t1,s2))
 
     /*
      * Reverse the sequence
