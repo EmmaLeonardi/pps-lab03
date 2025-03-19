@@ -26,7 +26,7 @@ object Sequences: // Essentially, generic linkedlists
       case Cons(_, t) => filter(t)(pred)
       case Nil() => Nil()
 
-    // Lab 03
+    // Lab 03 Task 1 - svolto da sola
 
     /*
      * Skip the first n elements of the sequence
