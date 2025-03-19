@@ -52,6 +52,13 @@ object Streams extends App:
       case (Cons(h1, t1), _) => cons(h1(), interleave(t1(), empty()))
       case (_, Cons(h2, t2)) => cons(h2(), interleave(empty(), t2()))
       case _ => empty()
+
+    def fibonacci(): Stream[Int] =
+      def _iterate[A](first: => A)(second: => A)(next: (A, A) => A): Stream[A] =
+        cons(first, _iterate(next(first, second))(first)(next))
+
+      cons(0, _iterate(1)(0)(_ + _))
+
   end Stream
 end Streams
 
