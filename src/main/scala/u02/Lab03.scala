@@ -5,6 +5,8 @@ import Sequence.*
 import u02.Modules.Person
 import u02.Modules.Person.{Student, Teacher, name}
 
+import scala.annotation.tailrec
+
 object Lab03 extends App {
 
   def allTeacherCourses(s: Sequence[Person]): Sequence[String] = flatMap(s)(_ match
@@ -12,7 +14,10 @@ object Lab03 extends App {
     case Student(_, _) => Nil())
 }
 
+@tailrec
+def foldLeft[A, B](l: Sequence[A])(defaultValue: B)(f: (B, A) => B): B = l match
+  case Nil() => defaultValue
+  case Cons(h, t) => foldLeft(t)(f(defaultValue, h))(f)
 
-    
 
 
