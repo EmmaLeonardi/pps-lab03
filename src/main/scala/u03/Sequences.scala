@@ -148,7 +148,11 @@ object Sequences: // Essentially, generic linkedlists
      * E.g., [10, 20, 30] => ([10], [20, 30]) if pred is (_ < 20)
      * E.g., [11, 20, 31] => ([20], [11, 31]) if pred is (_ % 2 == 0)
      */
-    def partition[A](s: Sequence[A])(pred: A => Boolean): (Sequence[A], Sequence[A]) = ???
+    def partition[A](s: Sequence[A])(pred: A => Boolean): (Sequence[A], Sequence[A]) =
+      s match
+        case Nil() => (Nil(), Nil())
+        case Cons(h, t) if pred(h) => (Cons(h, filter(t)(pred)), filter(t)(!pred(_)))
+        case Cons(h, t) => (filter(t)(pred), Cons(h, filter(t)(!pred(_))))
 
   end Sequence
 end Sequences
