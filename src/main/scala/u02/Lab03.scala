@@ -9,6 +9,7 @@ import scala.annotation.tailrec
 
 object Lab03 extends App {
 
+  //Task 2 - svolto da sola
   def allTeacherCourses(s: Sequence[Person]): Sequence[String] = flatMap(s)(_ match
     case Teacher(_, c) => Cons(c, Nil())
     case Student(_, _) => Nil())

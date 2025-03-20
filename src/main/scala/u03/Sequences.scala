@@ -68,7 +68,6 @@ object Sequences: // Essentially, generic linkedlists
      * E.g., [] => []
      */
     def reverse[A](s: Sequence[A]): Sequence[A] =
-    //TODO: Check this again
       @tailrec
       def _reverse(seq: Sequence[A], reversed: Sequence[A]): Sequence[A] = seq match
         case Nil() => reversed
@@ -94,7 +93,15 @@ object Sequences: // Essentially, generic linkedlists
      * E.g., [30, 20, 10] => 10
      * E.g., [10, 1, 30] => 1
      */
-    def min(s: Sequence[Int]): Optional[Int] = ???
+    def min(s: Sequence[Int]): Optional[Int] =
+      @tailrec
+      def _min(seq: Sequence[Int], currentMin: Int): Optional[Int] = seq match
+        case Nil() => Just(currentMin)
+        case Cons(h, t) if h<currentMin =>_min(t, h)
+        case Cons(_, t) =>_min(t, currentMin)
+      s match
+        case Nil() => Empty()
+        case Cons(h, t) => _min(t, h)
 
     /*
      * Get the elements at even indices
