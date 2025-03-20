@@ -87,7 +87,6 @@ object Sequences: // Essentially, generic linkedlists
       case Nil() => Nil()
       case Cons(h, t) => concat(mapper(h), flatMap(t) (mapper))
 
-    //TODO: do these exercises
     /*
      * Get the minimum element in the sequence
      * E.g., [30, 20, 10] => 10
